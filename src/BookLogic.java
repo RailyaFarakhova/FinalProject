@@ -66,18 +66,13 @@ public class BookLogic {
      * @param newEntry - The new details of the book to overwrite the old.
      */
     public void updateBook(String title, String entryType, String newEntry){
+        Book book = getBook(entryType, title);
 
-        for(Book book : bookList) {
-            if (book.getTitle().toUpperCase().equals(title)) {
-                
-                // Used to find the book to update
-                switch (entryType.toUpperCase()) {
-                    case "TITLE":  book.changeTitle(newEntry);
-                    case "AUTHOR": book.changeAuthor(newEntry);
-                    case "YEAR":   book.changeYear(Integer.parseInt(newEntry));
-                }
-            }
-        }    
+        switch (entryType.toUpperCase()) {
+            case "TITLE":  book.changeTitle(newEntry); break;
+            case "AUTHOR": book.changeAuthor(newEntry); break;
+            case "YEAR":   book.changeYear(newEntry); break;
+        }
     }
 
     /**

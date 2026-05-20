@@ -12,7 +12,7 @@ public class Main {
         bookLogic.updateBook("over the garden wall", "title", "Dr Cucumber");
         System.out.println(bookLogic.getTitles());
 
-        bookLogic.addBook("lord of the Rings", "Squirtle", 2020);
+        bookLogic.addBook("Lord of the Rings", "Squirtle", 2020);
         System.out.println(bookLogic.getTitles());
 
         System.out.print(bookLogic.getBookInfo(bookLogic.getBook("author", "Squirtle")));

@@ -3,10 +3,12 @@ public class Book {
     private String title;
     private String author;
     private int yearPublished;
+
     private boolean checkedOut;
-    private String loaner;
-    private String email;
-    private int loanDate;
+
+    private String loaner; // The name of the person who checked out the book.
+    private String email; // As in the email address.
+    private int loanDate; // In 00.00.00 format ex. 05.05.26
 
     // Creates an empty book.
     public Book(){
@@ -80,8 +82,8 @@ public class Book {
      * Changes the year the book was published.
      * @param newYear - The new publishing year.
      */
-    public void changeYear(int newYear){
-        yearPublished = newYear;
+    public void changeYear(String newYear){
+        yearPublished = Integer.parseInt(newYear);
     }
 
     /**
