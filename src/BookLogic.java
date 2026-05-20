@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class BookLogic {
     // Used to store the books.
-    private ArrayList<Book> bookList;
+    private final ArrayList<Book> bookList;
 
     // Creates an empty catalog.
     public BookLogic(){
@@ -124,24 +124,24 @@ public class BookLogic {
      * @return All authors of the books in the catalog.
      */
     public ArrayList<String> getAuthors(){
-        ArrayList<String> titles = new ArrayList<>();
+        ArrayList<String> authors = new ArrayList<>();
 
         for(Book book : bookList){
-            titles.add(book.getTitle());
+            authors.add(book.getAuthor());
         }
-        return titles;
+        return authors;
     }
 
     /**
      * @return All years published from the books in the catalog.
      */
-    public ArrayList<String> getYears(){
-        ArrayList<String> titles = new ArrayList<>();
+    public ArrayList<Integer> getYears(){
+        ArrayList<Integer> years = new ArrayList<>();
 
         for(Book book : bookList){
-            titles.add(book.getTitle());
+            years.add(book.getYearPublished());
         }
-        return titles;
+        return years;
     }
 
     /**
@@ -158,7 +158,6 @@ public class BookLogic {
      * Uses a comma to separate the values.
      * Prints out an error message if the file cannot be read.
      */
-
     public void importBooks(){
         String split = ",";
         ArrayList<String> books = new ArrayList<>();
@@ -181,8 +180,10 @@ public class BookLogic {
         }
     }
 
-
-    //working tsv support as an option over csv to protect against commas in titles, this can be changed or removed later but i felt it should be included for now.
+    /**
+     * TSV support as an option over CSV to protect against commas in titles
+     * This can be changed or removed later, but I felt it should be included for now.
+     */
     public void importBooksTSV() {
         String split = "\t";
         ArrayList<String> books = new ArrayList<>();
