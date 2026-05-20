@@ -9,12 +9,12 @@ public class Main {
         bookLogic.removeBook("Title", "The lorax");
         System.out.println(bookLogic.getTitles());
 
-        bookLogic.updateBook("over the garden wall", "title", "dr cucumber");
+        bookLogic.updateBook("over the garden wall", "title", "Dr Cucumber");
         System.out.println(bookLogic.getTitles());
 
-        bookLogic.addBook("lord of the rings", "squirtle", 2020);
+        bookLogic.addBook("lord of the Rings", "Squirtle", 2020);
         System.out.println(bookLogic.getTitles());
 
-        System.out.print(bookLogic.getBook("author", "squirtle"));
+        System.out.print(bookLogic.getBookInfo(bookLogic.getBook("author", "Squirtle")));
     }
 }

@@ -12,67 +12,6 @@ public class BookLogic {
     }
 
     /**
-     * Adds a book to the catalog using the title, author, and year published.
-     * @param title - The title of the book.
-     * @param author - The author of the book.
-     * @param yearPublished - The year the book was published.
-     */
-    public void addBook(String title, String author, int yearPublished){
-        bookList.add(new Book(title, author, yearPublished));
-    }
-
-    /**
-     * Removes a book from the catalog.
-     * @param entryType - How to search for the book (title or author).
-     * @param entry - The details of the book to remove.
-     */
-    public void removeBook(String entryType, String entry){
-        String input = entry.toUpperCase();
-        Book bookToRemove = new Book();
-
-        // Used to find the book to remove
-        switch (entryType.toUpperCase()){
-            case "TITLE":
-                for(Book book : bookList){
-                    if(book.getTitle().toUpperCase().equals(input)){
-                        bookToRemove = book;
-                    }
-                }
-                break;
-            case "AUTHOR":
-                for(Book book : bookList){
-                    if(book.getAuthor().toUpperCase().equals(input)){
-                        bookToRemove = book;
-                    }
-                }
-                break;
-        }
-
-        bookList.remove(bookToRemove);
-    }
-
-    /**
-     * Removes a book from the catalog.
-     * @param title - The title of the book to update.
-     * @param entryType - How to update the book (title, author, or year).
-     * @param newEntry - The new details of the book to overwrite the old.
-     */
-    public void updateBook(String title, String entryType, String newEntry){
-
-        for(Book book : bookList) {
-            if (book.getTitle().toUpperCase().equals(title)) {
-                
-                // Used to find the book to update
-                switch (entryType.toUpperCase()) {
-                    case "TITLE":  book.changeTitle(newEntry);
-                    case "AUTHOR": book.changeAuthor(newEntry);
-                    case "YEAR":   book.changeYear(Integer.parseInt(newEntry));
-                }
-            }
-        }    
-    }
-
-    /**
      * Finds a book in the catalog.
      * @param entryType - How to search for the book (title or author).
      * @param entry - The details of the book.
@@ -99,6 +38,46 @@ public class BookLogic {
                 break;
         }
         return book;
+    }
+
+    /**
+     * Adds a book to the catalog using the title, author, and year published.
+     * @param title - The title of the book.
+     * @param author - The author of the book.
+     * @param yearPublished - The year the book was published.
+     */
+    public void addBook(String title, String author, int yearPublished){
+        bookList.add(new Book(title, author, yearPublished));
+    }
+
+    /**
+     * Removes a book from the catalog.
+     * @param entryType - How to search for the book (title or author).
+     * @param entry - The details of the book to remove.
+     */
+    public void removeBook(String entryType, String entry){
+        bookList.remove(getBook(entryType, entry));
+    }
+
+    /**
+     * Removes a book from the catalog.
+     * @param title - The title of the book to update.
+     * @param entryType - How to update the book (title, author, or year).
+     * @param newEntry - The new details of the book to overwrite the old.
+     */
+    public void updateBook(String title, String entryType, String newEntry){
+
+        for(Book book : bookList) {
+            if (book.getTitle().toUpperCase().equals(title)) {
+                
+                // Used to find the book to update
+                switch (entryType.toUpperCase()) {
+                    case "TITLE":  book.changeTitle(newEntry);
+                    case "AUTHOR": book.changeAuthor(newEntry);
+                    case "YEAR":   book.changeYear(Integer.parseInt(newEntry));
+                }
+            }
+        }    
     }
 
     /**
