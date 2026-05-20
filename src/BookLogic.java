@@ -158,12 +158,37 @@ public class BookLogic {
      * Uses a comma to separate the values.
      * Prints out an error message if the file cannot be read.
      */
+
     public void importBooks(){
         String split = ",";
         ArrayList<String> books = new ArrayList<>();
 
         try{
             File file = new File("book.csv");
+            Scanner scanner = new Scanner(file);
+            while(scanner.hasNextLine()) {
+                books.add(scanner.nextLine());
+            }
+            scanner.close();
+
+        }catch(Exception e){
+            System.out.println("Error reading file.");
+        }
+
+        for(String book : books){
+            String[] bookInfo = book.split(split);
+            addBook(bookInfo[0], bookInfo[1], Integer.parseInt(bookInfo[2]));
+        }
+    }
+
+
+    //working tsv support as an option over csv to protect against commas in titles, this can be changed or removed later but i felt it should be included for now.
+    public void importBooksTSV() {
+        String split = "\t";
+        ArrayList<String> books = new ArrayList<>();
+
+        try{
+            File file = new File("book.tsv");
             Scanner scanner = new Scanner(file);
             while(scanner.hasNextLine()) {
                 books.add(scanner.nextLine());
