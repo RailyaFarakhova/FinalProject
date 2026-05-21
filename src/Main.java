@@ -3,7 +3,7 @@ public class Main {
         // This is used to test the program. :)
         BookLogic bookLogic = new BookLogic();
 
-        bookLogic.importBooks();
+        bookLogic.importBooksCSV("book.csv");
         System.out.println(bookLogic.getTitles());
 
         bookLogic.removeBook("Title", "The lorax");

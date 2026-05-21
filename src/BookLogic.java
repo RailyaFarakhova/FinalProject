@@ -12,6 +12,58 @@ public class BookLogic {
     }
 
     /**
+     * @return The book catalog.
+     */
+    public ArrayList<Book> getCollection() {
+        return bookList;
+    }
+
+    /**
+     * @return All titles of the books in the catalog.
+     */
+    public ArrayList<String> getTitles(){
+        ArrayList<String> titles = new ArrayList<>();
+
+        for(Book book : bookList){
+            titles.add(book.getTitle());
+        }
+        return titles;
+    }
+
+    /**
+     * @return All authors of the books in the catalog.
+     */
+    public ArrayList<String> getAuthors(){
+        ArrayList<String> authors = new ArrayList<>();
+
+        for(Book book : bookList){
+            authors.add(book.getAuthor());
+        }
+        return authors;
+    }
+
+    /**
+     * @return All years published from the books in the catalog.
+     */
+    public ArrayList<Integer> getYears(){
+        ArrayList<Integer> years = new ArrayList<>();
+
+        for(Book book : bookList){
+            years.add(book.getYearPublished());
+        }
+        return years;
+    }
+
+    /**
+     * Gets the book's details.
+     * @param book - The book to get the information of.
+     * @return The title, author, and year published of the book.
+     */
+    public String getBookInfo(Book book){
+        return book.getTitle() + ", " + book.getAuthor() + ", " + book.getYearPublished();
+    }
+
+    /**
      * Finds a book in the catalog.
      * @param entryType - How to search for the book (title or author).
      * @param entry - The details of the book.
@@ -76,68 +128,17 @@ public class BookLogic {
     }
 
     /**
-     * @return The book catalog.
-     */
-    public ArrayList<Book> getCollection() {
-        return bookList;
-    }
-
-    /**
-     * @return All titles of the books in the catalog.
-     */
-    public ArrayList<String> getTitles(){
-        ArrayList<String> titles = new ArrayList<>();
-
-        for(Book book : bookList){
-            titles.add(book.getTitle());
-        }
-        return titles;
-    }
-
-    /**
-     * @return All authors of the books in the catalog.
-     */
-    public ArrayList<String> getAuthors(){
-        ArrayList<String> authors = new ArrayList<>();
-
-        for(Book book : bookList){
-            authors.add(book.getAuthor());
-        }
-        return authors;
-    }
-
-    /**
-     * @return All years published from the books in the catalog.
-     */
-    public ArrayList<Integer> getYears(){
-        ArrayList<Integer> years = new ArrayList<>();
-
-        for(Book book : bookList){
-            years.add(book.getYearPublished());
-        }
-        return years;
-    }
-
-    /**
-     * Gets the book's details. 
-     * @param book - The book to get the information of.
-     * @return The title, author, and year published of the book.
-     */
-    public String getBookInfo(Book book){
-        return book.getTitle() + ", " + book.getAuthor() + ", " + book.getYearPublished();
-    }
-
-    /**
-     * Uses a csv file to enter the books into the catalog.
+     * Uses a CSV file to enter the books into the catalog.
      * Uses a comma to separate the values.
      * Prints out an error message if the file cannot be read.
+     * @param fileName - The name of the file to import.
      */
-    public void importBooks(){
+    public void importBooksCSV(String fileName){
         String split = ",";
         ArrayList<String> books = new ArrayList<>();
 
         try{
-            File file = new File("book.csv");
+            File file = new File(fileName);
             Scanner scanner = new Scanner(file);
             while(scanner.hasNextLine()) {
                 books.add(scanner.nextLine());
@@ -157,13 +158,14 @@ public class BookLogic {
     /**
      * TSV support as an option over CSV to protect against commas in titles
      * This can be changed or removed later, but I felt it should be included for now.
+     * @param fileName - The name of the file to import.
      */
-    public void importBooksTSV() {
+    public void importBooksTSV(String fileName) {
         String split = "\t";
         ArrayList<String> books = new ArrayList<>();
 
         try{
-            File file = new File("book.tsv");
+            File file = new File(fileName);
             Scanner scanner = new Scanner(file);
             while(scanner.hasNextLine()) {
                 books.add(scanner.nextLine());
