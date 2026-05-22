@@ -16,5 +16,7 @@ public class Main {
         System.out.println(bookLogic.getTitles());
 
         System.out.print(bookLogic.getBookInfo(bookLogic.getBook("author", "Squirtle")));
+
+        new MainGUI();
     }
 }
