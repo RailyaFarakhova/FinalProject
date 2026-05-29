@@ -1,5 +1,5 @@
-import java.util.Calendar;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Book {
     // Book properties.
@@ -11,8 +11,8 @@ public class Book {
 
     private String loaner; // The name of the person who checked out the book.
     private String email; // As in the email address.
-    private Calendar dueDate; // In 00.00.00 format ex. 05.05.26
-    private Calendar loanDate;
+    private LocalDate loanDate;
+    private LocalDate checkoutDate;
 
     // Creates an empty book.
     public Book(){
@@ -22,8 +22,8 @@ public class Book {
         checkedOut = false;
         loaner = "";
         email = "";
-        dueDate = Calendar.getInstance();
-        loanDate = Calendar.getInstance();
+        loanDate = null;
+        checkoutDate = null;
     }
 
     /**
@@ -37,11 +37,11 @@ public class Book {
         this.title = title;
         this.author = author;
         this.yearPublished = yearPublished;
-        this.checkedOut = false;
-        this.loaner = "";
-        this.email = "";
-        this.dueDate = Calendar.getInstance();
-        this.loanDate = Calendar.getInstance();
+        checkedOut = false;
+        loaner = "";
+        email = "";
+        loanDate = null;
+        checkoutDate = null;
     }
 
     /**
@@ -74,9 +74,7 @@ public class Book {
      * @return The date.
      */
     public String getCheckoutDate() {
-        return loanDate.get(Calendar.MONTH) + "/"
-                + loanDate.get(Calendar.DAY_OF_MONTH) + "/"
-                + loanDate.get(Calendar.YEAR);
+        return checkoutDate.format(DateTimeFormatter.ofPattern("MM/dd/yyyy"));
     }
 
     /**
@@ -86,9 +84,7 @@ public class Book {
      * @return The date.
      */
     public String getDueDate(){
-        return dueDate.get(Calendar.MONTH) + "/"
-                + loanDate.get(Calendar.DAY_OF_MONTH) + "/"
-                + loanDate.get(Calendar.YEAR);
+        return loanDate.format(DateTimeFormatter.ofPattern("MM/dd/yyyy"));
     }
 
     /**
@@ -125,8 +121,9 @@ public class Book {
     public void checkOut(String name, String address){
         loaner = name;
         email = address;
-        loanDate = Calendar.getInstance();
-        dueDate.add(Calendar.DATE, 14);
+        checkoutDate = LocalDate.now();
+        loanDate = LocalDate.now();
+        loanDate = loanDate.plusWeeks(2);
 
         checkedOut = true;
     }
