@@ -128,40 +128,22 @@ public class BookLogic {
     }
 
     /**
-     * Uses a CSV file to enter the books into the catalog.
-     * Uses a comma to separate the values.
+     * Enters the books into the catalog from a file.
+     * Uses a comma to separate the values for CSV files
+     * Uses a tab to separate the values for TSV files.
      * Prints out an error message if the file cannot be read.
+     * @param fileType - The type of file to import.
      * @param fileName - The name of the file to import.
      */
-    public void importBooksCSV(String fileName){
-        String split = ",";
-        ArrayList<String> books = new ArrayList<>();
+    public void importBooks(String fileType, String fileName){
+        String split = "";
 
-        try{
-            File file = new File(fileName);
-            Scanner scanner = new Scanner(file);
-            while(scanner.hasNextLine()) {
-                books.add(scanner.nextLine());
-            }
-            scanner.close();
-
-        }catch(Exception e){
-            System.out.println("Error reading file.");
+        if(fileType.toUpperCase().equals("TSV")){
+             split = "\t";
+        } else if (fileType.toUpperCase().equals("CSV")){
+            split = ",";
         }
 
-        for(String book : books){
-            String[] bookInfo = book.split(split);
-            addBook(bookInfo[0], bookInfo[1], Integer.parseInt(bookInfo[2]));
-        }
-    }
-
-    /**
-     * TSV support as an option over CSV to protect against commas in titles
-     * This can be changed or removed later, but I felt it should be included for now.
-     * @param fileName - The name of the file to import.
-     */
-    public void importBooksTSV(String fileName) {
-        String split = "\t";
         ArrayList<String> books = new ArrayList<>();
 
         try{
