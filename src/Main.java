@@ -18,5 +18,7 @@ public class Main {
         bookLogic.getBook("Title", "The lorax").checkOut("mochi", "mochi@gmail.com");
         System.out.println(bookLogic.getBook("Title", "The lorax").getCheckoutDate());
         System.out.println(bookLogic.getBook("Title", "The lorax").getDueDate());
+
+        new MainGUI();
     }
 }
