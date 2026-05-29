@@ -1,3 +1,6 @@
+import java.util.Calendar;
+import java.util.Date;
+
 public class Book {
     // Book properties.
     private String title;
@@ -8,7 +11,8 @@ public class Book {
 
     private String loaner; // The name of the person who checked out the book.
     private String email; // As in the email address.
-    private int loanDate; // In 00.00.00 format ex. 05.05.26
+    private Calendar dueDate; // In 00.00.00 format ex. 05.05.26
+    private Calendar loanDate;
 
     // Creates an empty book.
     public Book(){
@@ -18,7 +22,8 @@ public class Book {
         checkedOut = false;
         loaner = "";
         email = "";
-        loanDate = 0;
+        dueDate = Calendar.getInstance();
+        loanDate = Calendar.getInstance();
     }
 
     /**
@@ -35,7 +40,8 @@ public class Book {
         this.checkedOut = false;
         this.loaner = "";
         this.email = "";
-        this.loanDate = 0;
+        this.dueDate = Calendar.getInstance();
+        this.loanDate = Calendar.getInstance();
     }
 
     /**
@@ -60,6 +66,29 @@ public class Book {
      */
     public int getYearPublished() {
         return yearPublished;
+    }
+
+    /**
+     * Gets the date the book was checked out.
+     * Follows a month, day, and year format.
+     * @return The date.
+     */
+    public String getCheckoutDate() {
+        return loanDate.get(Calendar.MONTH) + "/"
+                + loanDate.get(Calendar.DAY_OF_MONTH) + "/"
+                + loanDate.get(Calendar.YEAR);
+    }
+
+    /**
+     * Gets the book's due date.
+     * Follows a month, day, and year format.
+     * This is two weeks after the book was checked out.
+     * @return The date.
+     */
+    public String getDueDate(){
+        return dueDate.get(Calendar.MONTH) + "/"
+                + loanDate.get(Calendar.DAY_OF_MONTH) + "/"
+                + loanDate.get(Calendar.YEAR);
     }
 
     /**
@@ -88,15 +117,16 @@ public class Book {
 
     /**
      * Replaces the book's checkout details to the provided.
+     * Sets the book's due date two weeks after the checkout date.
      * This is to be used to keep track of who is responsible for the book.
      * @param name - The name of the person who checked out the book.
      * @param address - The email address of the person who checked out the book.
-     * @param date - The date the book was checked out.
      */
-    public void checkOut(String name, String address, int date){
+    public void checkOut(String name, String address){
         loaner = name;
         email = address;
-        loanDate = date;
+        loanDate = Calendar.getInstance();
+        dueDate.add(Calendar.DATE, 14);
 
         checkedOut = true;
     }

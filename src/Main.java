@@ -6,15 +6,17 @@ public class Main {
         bookLogic.importBooksCSV("book.csv");
         System.out.println(bookLogic.getTitles());
 
-        bookLogic.removeBook("Title", "The lorax");
-        System.out.println(bookLogic.getTitles());
+//        bookLogic.removeBook("Title", "The lorax");
+//        System.out.println(bookLogic.getTitles());
+//
+//        bookLogic.updateBook("over the garden wall", "title", "Dr Cucumber");
+//        System.out.println(bookLogic.getTitles());
+//
+//        bookLogic.addBook("Lord of the Rings", "Squirtle", 2020);
+//        System.out.println(bookLogic.getTitles());
 
-        bookLogic.updateBook("over the garden wall", "title", "Dr Cucumber");
-        System.out.println(bookLogic.getTitles());
-
-        bookLogic.addBook("Lord of the Rings", "Squirtle", 2020);
-        System.out.println(bookLogic.getTitles());
-
-        System.out.print(bookLogic.getBookInfo(bookLogic.getBook("author", "Squirtle")));
+        bookLogic.getBook("Title", "The lorax").checkOut("mochi", "mochi@gmail.com");
+        System.out.println(bookLogic.getBook("Title", "The lorax").getCheckoutDate());
+        System.out.println(bookLogic.getBook("Title", "The lorax").getDueDate());
     }
 }
